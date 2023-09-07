@@ -23,13 +23,20 @@ public class Character : MonoBehaviour
 
     public void Initialize()
     {
+        respawnTransformData = new Utility.TransformData
+        {
+            position = transform.position,
+
+            rotation = transform.rotation.eulerAngles
+        };
+
         Spawn();
     }
 
     void Spawn()
     {
         if (playerBehaviourTree)
-            Destroy(playerBehaviourTree);
+            Destroy(playerBehaviourTree.gameObject);
 
         playerBehaviourTree = Instantiate(playerBehaviourTreePrefab, transform);
 
@@ -51,7 +58,7 @@ public class Character : MonoBehaviour
             yield return respawnUI.WaitForEnterTransition();
 
             foreach (GameObject thisUI in uis)
-                Destroy(thisUI);
+                Destroy(thisUI.gameObject);
 
             uis.Clear();
 

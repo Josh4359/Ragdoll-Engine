@@ -30,7 +30,7 @@ namespace RagdollEngine
 
             roll = false;
 
-            if (((moveVelocity + additiveVelocity).magnitude > moveDeadzone) && (inputHandler.roll.hold || rollLock || (wasActive && !groundInformation.ground)))
+            if (((moveVelocity + additiveVelocity).magnitude > moveDeadzone) && (inputHandler.roll.pressed || (wasActive && inputHandler.roll.hold) || rollLock || (wasActive && !groundInformation.ground)))
             {
                 if (!wasActive)
                     animator.SetTrigger("Roll");

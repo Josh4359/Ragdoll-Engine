@@ -82,6 +82,8 @@ namespace RagdollEngine
             public bool cast;
 
             public bool slope;
+
+            public bool enter;
         }
 
         public override void FixedUpdate()

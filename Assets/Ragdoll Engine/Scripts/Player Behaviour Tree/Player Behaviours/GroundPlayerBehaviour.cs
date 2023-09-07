@@ -18,7 +18,21 @@ namespace RagdollEngine
 
         bool slopeCooldown;
 
+        bool initialized;
+
         public override bool Evaluate()
+        {
+            if (!initialized)
+            {
+                initialized = true;
+
+                Execute();
+            }
+
+            return groundInformation.ground;
+        }
+
+        public override void Execute()
         {
             bool cast = Physics.Raycast(playerTransform.position,
                 -playerTransform.up,
@@ -51,10 +65,12 @@ namespace RagdollEngine
 
                 cast = cast,
 
-                slope = slope
+                slope = slope,
+
+                enter = ground && !wasActive
             };
 
-            return ground;
+            active = ground;
         }
     }
 }
