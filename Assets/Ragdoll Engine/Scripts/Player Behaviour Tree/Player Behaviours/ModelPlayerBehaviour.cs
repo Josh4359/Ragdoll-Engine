@@ -48,7 +48,7 @@ namespace RagdollEngine
 
             modelTransform.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(forward - Vector3.Project(forward, plane), up), up);
 
-            modelTransform.position = groundInformation.ground ? groundInformation.hit.point : playerTransform.position - (modelTransform.up * height);
+            modelTransform.position = groundInformation.cast ? groundInformation.hit.point : playerTransform.position - (modelTransform.up * height);
         }
     }
 }

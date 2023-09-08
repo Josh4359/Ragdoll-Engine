@@ -177,7 +177,7 @@ namespace RagdollEngine
 
             normal = groundInformation.ground ? groundInformation.hit.normal : Vector3.up;
 
-            rotation = Quaternion.identity;
+            rotation = cameraTransform.rotation;
 
             ghostOffset = Vector3.zero;
 
@@ -193,6 +193,8 @@ namespace RagdollEngine
             base.Transition();
 
             Enable();
+
+            rotation = Quaternion.identity;
 
             lookRotation.x = Vector3.SignedAngle(modelTransform.forward, Vector3.forward, -Vector3.up);
         }
