@@ -17,6 +17,9 @@ namespace RagdollEngine
         void LateUpdate()
         {
             animator.SetBool("Stomping", active);
+
+            if (wasActive && groundInformation.ground)
+                landAudioSource.Play();
         }
 
         public override bool Evaluate()
@@ -35,8 +38,6 @@ namespace RagdollEngine
                     animator.SetTrigger("Stomp");
                 }
             }
-            else if (wasActive && groundInformation.ground)
-                landAudioSource.Play();
 
             return stomping;
         }
