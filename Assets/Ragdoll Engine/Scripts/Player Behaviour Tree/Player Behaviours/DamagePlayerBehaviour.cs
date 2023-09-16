@@ -217,7 +217,7 @@ namespace RagdollEngine
                                 {
                                     new()
                                     {
-                                        count = Mathf.Max(rings, lost)
+                                        count = Mathf.Min(rings, lost)
                                     }
                                 });
 
