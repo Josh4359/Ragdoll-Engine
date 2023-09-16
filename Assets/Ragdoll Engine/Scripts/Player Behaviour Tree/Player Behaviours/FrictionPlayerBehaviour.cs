@@ -4,6 +4,10 @@ namespace RagdollEngine
 {
     public class FrictionPlayerBehaviour : PlayerBehaviour
     {
+        [SerializeField] AnimationCurve handlingOverSpeed = AnimationCurve.Linear(0, 0, 1, 1);
+
+        [SerializeField] AnimationCurve airHandlingOverSpeed = AnimationCurve.Linear(0, 0, 1, 1);
+
         [SerializeField] float minFriction;
 
         [SerializeField] float maxFriction;
@@ -57,7 +61,7 @@ namespace RagdollEngine
         {
             if (accelerationVector.magnitude <= Physics.sleepThreshold) return;
 
-            float handling = Mathf.Lerp(minHandling, maxHandling, 1 - Mathf.Pow(10, -(moveVelocity.magnitude / maxSpeed)));
+            float handling = Mathf.Lerp(minHandling, maxHandling, (groundInformation.ground ? handlingOverSpeed : airHandlingOverSpeed).Evaluate(1 - Mathf.Pow(10, -(moveVelocity.magnitude / maxSpeed))));
 
             accelerationVector += (accelerationVector.normalized * moveVelocity.magnitude * handling)
                 - (moveVelocity * handling);

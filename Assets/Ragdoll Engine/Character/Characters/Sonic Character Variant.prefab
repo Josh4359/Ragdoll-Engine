@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8953842930348795526
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2616827416827111586, guid: f344aeeb8c12f524aaa6f13cac485041, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2616827416827111586, guid: f344aeeb8c12f524aaa6f13cac485041, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2616827416827111586, guid: f344aeeb8c12f524aaa6f13cac485041, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2616827416827111586, guid: f344aeeb8c12f524aaa6f13cac485041, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2616827416827111586, guid: f344aeeb8c12f524aaa6f13cac485041, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2616827416827111586, guid: f344aeeb8c12f524aaa6f13cac485041, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2616827416827111586, guid: f344aeeb8c12f524aaa6f13cac485041, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2616827416827111586, guid: f344aeeb8c12f524aaa6f13cac485041, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2616827416827111586, guid: f344aeeb8c12f524aaa6f13cac485041, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2616827416827111586, guid: f344aeeb8c12f524aaa6f13cac485041, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2616827416827111586, guid: f344aeeb8c12f524aaa6f13cac485041, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8487498030417276728, guid: f344aeeb8c12f524aaa6f13cac485041, type: 3}
+      propertyPath: m_Name
+      value: Sonic Character Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842867025789024806, guid: f344aeeb8c12f524aaa6f13cac485041, type: 3}
+      propertyPath: playerBehaviourTreePrefab
+      value: 
+      objectReference: {fileID: 5910379342027677545, guid: 4e1f1f6a346302347bd38889ee87d4ab, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f344aeeb8c12f524aaa6f13cac485041, type: 3}

@@ -75,6 +75,10 @@ public class Player : MonoBehaviour
                 inputHandler.boost.Set(callbackContext.ReadValue<float>());
 
                 break;
+            case "Cyloop":
+                inputHandler.cyloop.Set(callbackContext.ReadValue<float>());
+
+                break;
             case "Attack":
                 inputHandler.attack.Set(callbackContext.ReadValue<float>());
 

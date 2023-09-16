@@ -23,6 +23,8 @@ namespace RagdollEngine
 
         public Button boost = new Button();
 
+        public Button cyloop = new Button();
+
         public Button attack = new Button();
 
         public Button sidestep = new Button();

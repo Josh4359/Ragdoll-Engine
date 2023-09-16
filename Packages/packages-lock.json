@@ -1,5 +1,15 @@
 {
   "dependencies": {
+    "com.josh.spline-importer": {
+      "version": "https://github.com/Josh4359/Spline-Importer.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.mathematics": "1.0.0",
+        "com.unity.splines": "1.0.0"
+      },
+      "hash": "a0b3182a056f920845025f4a56f3e1a2e964e295"
+    },
     "com.unity.collab-proxy": {
       "version": "2.0.4",
       "depth": 0,
@@ -81,6 +91,15 @@
       "depth": 1,
       "source": "registry",
       "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.recorder": {
+      "version": "4.0.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.timeline": "1.0.0"
+      },
       "url": "https://packages.unity.com"
     },
     "com.unity.render-pipelines.core": {

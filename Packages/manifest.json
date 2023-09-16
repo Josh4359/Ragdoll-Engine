@@ -1,8 +1,10 @@
 {
   "dependencies": {
+    "com.josh.spline-importer": "https://github.com/Josh4359/Spline-Importer.git",
     "com.unity.collab-proxy": "2.0.4",
     "com.unity.feature.development": "1.0.1",
     "com.unity.inputsystem": "1.6.3",
+    "com.unity.recorder": "4.0.1",
     "com.unity.shadergraph": "14.0.8",
     "com.unity.splines": "2.2.1",
     "com.unity.textmeshpro": "3.0.6",

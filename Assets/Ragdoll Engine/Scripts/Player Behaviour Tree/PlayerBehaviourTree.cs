@@ -1,5 +1,4 @@
 using BehaviourGraph;
-using System;
 using System.Collections.Generic;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -71,7 +70,7 @@ namespace RagdollEngine
 
         [HideInInspector] public bool moving;
 
-        bool initialized;
+        [HideInInspector] public bool initialized;
 
         public struct GroundInformation
         {
@@ -149,256 +148,106 @@ namespace RagdollEngine
 
     public class PlayerBehaviour : BehaviourGraph.Behaviour
     {
-        public PlayerBehaviourTree playerBehaviourTree
-        {
-            get
-            {
-                return behaviourTree as PlayerBehaviourTree;
-            }
-        }
+        public PlayerBehaviourTree playerBehaviourTree => behaviourTree as PlayerBehaviourTree;
 
-        public Transform playerTransform
-        {
-            get
-            {
-                return playerBehaviourTree.playerTransform;
-            }
-        }
+        public Transform playerTransform => playerBehaviourTree.playerTransform;
 
-        public Transform modelTransform
-        {
-            get
-            {
-                return playerBehaviourTree.modelTransform;
-            }
-        }
+        public Transform modelTransform => playerBehaviourTree.modelTransform;
 
-        public Rigidbody RB
-        {
-            get
-            {
-                return playerBehaviourTree.RB;
-            }
-        }
+        public Rigidbody RB => playerBehaviourTree.RB;
 
-        public Animator animator
-        {
-            get
-            {
-                return playerBehaviourTree.animator;
-            }
-        }
+        public Animator animator => playerBehaviourTree.animator;
 
-        public LayerMask layerMask
-        {
-            get
-            {
-                return playerBehaviourTree.layerMask;
-            }
-        }
+        public LayerMask layerMask => playerBehaviourTree.layerMask;
 
-        public float height
-        {
-            get
-            {
-                return playerBehaviourTree.height;
-            }
-        }
+        public float height => playerBehaviourTree.height;
 
-        public float moveDeadzone
-        {
-            get
-            {
-                return playerBehaviourTree.moveDeadzone;
-            }
-        }
+        public float moveDeadzone => playerBehaviourTree.moveDeadzone;
 
         public GroundInformation groundInformation
         {
-            get
-            {
-                return playerBehaviourTree.groundInformation;
-            }
-            set
-            {
-                playerBehaviourTree.groundInformation = value;
-            }
+            get => playerBehaviourTree.groundInformation;
+            set => playerBehaviourTree.groundInformation = value;
         }
 
         public List<Volume> volumes
         {
-            get
-            {
-                return playerBehaviourTree.volumes;
-            }
-            set
-            {
-                playerBehaviourTree.volumes = value;
-            }
+            get => playerBehaviourTree.volumes;
+            set => playerBehaviourTree.volumes = value;
         }
 
         public List<StageObject> stageObjects
         {
-            get
-            {
-                return playerBehaviourTree.stageObjects;
-            }
-            set
-            {
-                playerBehaviourTree.stageObjects = value;
-            }
+            get => playerBehaviourTree.stageObjects;
+            set => playerBehaviourTree.stageObjects = value;
         }
 
-        public Character character
-        {
-            get
-            {
-                return playerBehaviourTree.character;
-            }
-        }
+        public Character character => playerBehaviourTree.character;
 
-        public Transform cameraTransform
-        {
-            get
-            {
-                return playerBehaviourTree.cameraTransform;
-            }
-        }
+        public Transform cameraTransform => playerBehaviourTree.cameraTransform;
 
-        public Canvas canvas
-        {
-            get
-            {
-                return playerBehaviourTree.canvas;
-            }
-        }
+        public Canvas canvas => playerBehaviourTree.canvas;
 
-        public InputHandler inputHandler
-        {
-            get
-            {
-                return playerBehaviourTree.inputHandler;
-            }
-        }
+        public InputHandler inputHandler => playerBehaviourTree.inputHandler;
 
         public Vector3 additiveVelocity
         {
-            get
-            {
-                return playerBehaviourTree.additiveVelocity;
-            }
-            set
-            {
-                playerBehaviourTree.additiveVelocity = value;
-            }
+            get => playerBehaviourTree.additiveVelocity;
+            set => playerBehaviourTree.additiveVelocity = value;
         }
 
         public Vector3 movePosition
         {
-            get
-            {
-                return playerBehaviourTree.movePosition;
-            }
-            set
-            {
-                playerBehaviourTree.movePosition = value;
-            }
+            get => playerBehaviourTree.movePosition;
+            set => playerBehaviourTree.movePosition = value;
         }
 
         public Vector3 moveVelocity
         {
-            get
-            {
-                return playerBehaviourTree.moveVelocity;
-            }
-            set
-            {
-                playerBehaviourTree.moveVelocity = value;
-            }
+            get => playerBehaviourTree.moveVelocity;
+            set => playerBehaviourTree.moveVelocity = value;
         }
 
         public Vector3 accelerationVector
         {
-            get
-            {
-                return playerBehaviourTree.accelerationVector;
-            }
-            set
-            {
-                playerBehaviourTree.accelerationVector = value;
-            }
+            get => playerBehaviourTree.accelerationVector;
+            set => playerBehaviourTree.accelerationVector = value;
         }
 
         public Vector3 tangent
         {
-            get
-            {
-                return playerBehaviourTree.tangent;
-            }
-            set
-            {
-                playerBehaviourTree.tangent = value;
-            }
+            get => playerBehaviourTree.tangent;
+            set => playerBehaviourTree.tangent = value;
         }
 
         public Vector3 plane
         {
-            get
-            {
-                return playerBehaviourTree.plane;
-            }
-            set
-            {
-                playerBehaviourTree.plane = value;
-            }
+            get => playerBehaviourTree.plane;
+            set => playerBehaviourTree.plane = value;
         }
 
         public bool overrideModelTransform
         {
-            get
-            {
-                return playerBehaviourTree.overrideModelTransform;
-            }
-            set
-            {
-                playerBehaviourTree.overrideModelTransform = value;
-            }
+            get => playerBehaviourTree.overrideModelTransform;
+            set => playerBehaviourTree.overrideModelTransform = value;
         }
 
         public bool kinematic
         {
-            get
-            {
-                return playerBehaviourTree.kinematic;
-            }
-            set
-            {
-                playerBehaviourTree.kinematic = value;
-            }
+            get => playerBehaviourTree.kinematic;
+            set => playerBehaviourTree.kinematic = value;
         }
 
         public bool respawnTrigger
         {
-            get
-            {
-                return playerBehaviourTree.respawnTrigger;
-            }
-            set
-            {
-                playerBehaviourTree.respawnTrigger = value;
-            }
+            get => playerBehaviourTree.respawnTrigger;
+            set => playerBehaviourTree.respawnTrigger = value;
         }
 
         public bool moving
         {
-            get
-            {
-                return playerBehaviourTree.moving;
-            }
-            set
-            {
-                playerBehaviourTree.moving = value;
-            }
+            get => playerBehaviourTree.moving;
+            set => playerBehaviourTree.moving = value;
         }
     }
 }

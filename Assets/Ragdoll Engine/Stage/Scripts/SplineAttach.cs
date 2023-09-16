@@ -7,15 +7,19 @@ public class SplineAttach : MonoBehaviour
 {
     [SerializeField] SplineContainer splineContainer;
 
-    [SerializeField] Vector3 offset;
+    [SerializeField] Vector3 positionOffset;
+
+    [SerializeField] Vector3 rotationOffset;
 
     [SerializeField] float distance;
+
+    [SerializeField] float anchor;
 
     void Update()
     {
         if (!splineContainer) return;
 
-        splineContainer.Evaluate(distance / splineContainer.CalculateLength(), out float3 position, out float3 tangent, out float3 upVector);
+        splineContainer.Evaluate(anchor + (distance / splineContainer.CalculateLength()), out float3 position, out float3 tangent, out float3 upVector);
 
         Vector3 forward = Vector3.Normalize(tangent);
 
@@ -24,10 +28,10 @@ public class SplineAttach : MonoBehaviour
         Vector3 right = Vector3.Cross(forward, up);
 
         transform.position = (Vector3)position
-            + (right * offset.x)
-            + (up * offset.y)
-            + (forward * offset.z);
+            + (right * positionOffset.x)
+            + (up * positionOffset.y)
+            + (forward * positionOffset.z);
 
-        transform.rotation = Quaternion.LookRotation(forward, up);
+        transform.rotation = Quaternion.LookRotation(forward, up) * Quaternion.Euler(rotationOffset);
     }
 }

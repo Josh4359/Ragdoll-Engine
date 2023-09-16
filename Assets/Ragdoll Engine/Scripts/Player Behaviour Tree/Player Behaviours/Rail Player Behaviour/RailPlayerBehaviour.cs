@@ -12,9 +12,9 @@ namespace RagdollEngine
 
         [SerializeField] RailExtension[] postExtensions;
 
-        [SerializeField] float distance;
+        //[SerializeField] float distance;
 
-        [SerializeField] float minSpeed;
+        //[SerializeField] float minSpeed;
 
         [SerializeField] float uphillSlopeRatio;
 
@@ -42,6 +42,8 @@ namespace RagdollEngine
 
         bool enter;
 
+        bool railCooldown;
+
         void LateUpdate()
         {
             animator.SetBool("Grinding", active);
@@ -63,15 +65,29 @@ namespace RagdollEngine
 
             if (!rail)
             {
-                bool cast = Physics.Raycast(playerTransform.position, -playerTransform.up, out RaycastHit hit, distance + (Mathf.Max(Vector3.Dot(RB.velocity, -playerTransform.up), 0) * Time.fixedDeltaTime), railLayerMask, QueryTriggerInteraction.Ignore);
+                //bool cast = Physics.Raycast(playerTransform.position, -playerTransform.up, out RaycastHit hit, distance + (Mathf.Max(Vector3.Dot(RB.velocity, -playerTransform.up), 0) * Time.fixedDeltaTime), railLayerMask, QueryTriggerInteraction.Ignore);
 
-                if (!cast) return;
+                bool check = RailCheck(out RailStageObject railStageObject);
 
-                hit.collider.TryGetComponent(out RailStageObject railStageObject);
+                if (!check)
+                {
+                    railCooldown = false;
 
-                if (!railStageObject) return;
+                    return;
+                }
 
-                SplineUtility.GetNearestPoint(railStageObject.splineContainer.Spline, Utility.DivideVector3(hit.point - railStageObject.splineContainer.transform.position, railStageObject.splineContainer.transform.lossyScale), out float3 _, out t);
+                //hit.collider.TryGetComponent(out RailStageObject railStageObject);
+
+                /*if (!railStageObject)
+                {
+                    railCooldown = false;
+
+                    return;
+                }*/
+
+                if (railCooldown && railStageObject.splineContainer == splineContainer) return;
+
+                SplineUtility.GetNearestPoint(railStageObject.splineContainer.Spline, Utility.DivideVector3(/*hit.point*/ playerTransform.position - railStageObject.splineContainer.transform.position, railStageObject.splineContainer.transform.lossyScale), out float3 _, out t);
 
                 Vector3 pointTangent = ((Vector3)railStageObject.splineContainer.EvaluateTangent(t)).normalized;
 
@@ -101,6 +117,9 @@ namespace RagdollEngine
 
                 float length = railStageObject.splineContainer.CalculateLength();
 
+                rail = true;
+
+                /*
                 rail = Vector3.Dot(RB.velocity, (Vector3)nearest1 - hit.point) > 0
                     && (groundInformation.ground || Vector3.Dot(RB.velocity, matrix.c1) <= 0)
                     && (!groundInformation.ground || hit.distance < groundInformation.hit.distance)
@@ -108,6 +127,9 @@ namespace RagdollEngine
                     && (length - (t1 * length) > 1 || Vector3.Dot(RB.velocity, -matrix.c2) > 0);
 
                 if (!rail) return;
+                */
+
+                railCooldown = true;
 
                 onRail = true;
 
@@ -146,6 +168,9 @@ namespace RagdollEngine
 
                 t += dot / splineContainer.CalculateLength();
 
+                if (splineContainer.Spline.Closed)
+                    t = Mathf.Repeat(t, 1);
+
                 point = nearest;
 
                 goal = nearest + (matrix.c1 * height);
@@ -163,7 +188,7 @@ namespace RagdollEngine
                 if (Physics.Raycast(playerTransform.position, difference.normalized, difference.magnitude, layerMask, QueryTriggerInteraction.Ignore)
                     || Physics.Raycast(playerTransform.position, difference1.normalized, difference1.magnitude, layerMask, QueryTriggerInteraction.Ignore))
                 {
-                    rail = false;
+                    Exit();
 
                     return;
                 }
@@ -183,7 +208,7 @@ namespace RagdollEngine
                 if ((dot >= 0 && t > 1)
                     || (dot <= 0 && t < 0))
                 {
-                    rail = false;
+                    Exit();
 
                     return;
                 }
@@ -192,7 +217,7 @@ namespace RagdollEngine
                     animator.SetTrigger("Grind");
             }
             else if (wasActive)
-                rail = false;
+                Exit();
         }
 
         public void Enter(RailStageObject railStageObject)
@@ -217,6 +242,8 @@ namespace RagdollEngine
 
             pass = true;
 
+            railCooldown = true;
+
             onRail = true;
 
             enter = true;
@@ -230,6 +257,13 @@ namespace RagdollEngine
             animator.SetTrigger("Grind");
 
             kinematic = true;
+        }
+
+        void Exit()
+        {
+            rail = false;
+
+            railCooldown = true;
         }
 
         void ExecuteExtensions(RailExtension[] railExtensions, out bool successful)
@@ -254,6 +288,21 @@ namespace RagdollEngine
             }
 
             successful = true;
+        }
+
+        bool RailCheck(out RailStageObject railStageObject)
+        {
+            railStageObject = null;
+
+            foreach (StageObject thisStageObject in stageObjects)
+                if (thisStageObject is RailStageObject)
+                {
+                    railStageObject = thisStageObject as RailStageObject;
+
+                    return true;
+                }
+
+            return false;
         }
     }
 

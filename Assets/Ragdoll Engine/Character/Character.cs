@@ -34,7 +34,7 @@ namespace RagdollEngine
             Spawn();
         }
 
-        void Spawn()
+        public virtual void Spawn()
         {
             if (playerBehaviourTree)
                 Destroy(playerBehaviourTree.gameObject);

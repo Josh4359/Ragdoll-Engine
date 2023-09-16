@@ -18,11 +18,7 @@ namespace RagdollEngine
 
         float currentSwitchDirection;
 
-        float switchDirection;
-
         float switchTransition;
-
-        float switchTransitionDistance;
 
         float currentReverseCoyoteTime;
 
@@ -31,8 +27,10 @@ namespace RagdollEngine
             if (inputHandler.sidestep.pressed)
                 currentSwitchDirection = Mathf.Sign(inputHandler.sidestep.value * Vector3.Dot(cameraTransform.forward, velocity));
 
+            Vector3 rayNormal = matrix.c0 * currentSwitchDirection * Mathf.Sign(Vector3.Dot(velocity, matrix.c2));
+
             if (switchTransition <= 0
-                    && Physics.SphereCast(point, 0.5f, matrix.c0 * currentSwitchDirection * Mathf.Sign(Vector3.Dot(velocity, matrix.c2)), out RaycastHit hit, switchDistance - 0.5f, railLayerMask, QueryTriggerInteraction.Ignore)
+                    && Physics.SphereCast(point + rayNormal, 0.5f, rayNormal, out RaycastHit hit, switchDistance - 0.5f, railLayerMask, QueryTriggerInteraction.Ignore)
                     && (inputHandler.sidestep.pressed
                         || currentReverseCoyoteTime > 0))
             {
@@ -60,13 +58,13 @@ namespace RagdollEngine
 
                 velocity = Vector3.Project(velocity, currentMatrix.c2);
 
-                switchDirection = currentSwitchDirection * Mathf.Sign(Vector3.Dot(velocity, matrix.c2) * Vector3.Dot(currentMatrix.c2, matrix.c2));
+                //switchDirection = currentSwitchDirection * Mathf.Sign(Vector3.Dot(velocity, matrix.c2) * Vector3.Dot(currentMatrix.c2, matrix.c2));
 
                 matrix = currentMatrix;
 
                 switchTransition = switchTransitionTime;
 
-                switchTransitionDistance = Vector3.Distance(nearest, point);
+                //switchTransitionDistance = Vector3.Distance(nearest, point);
 
                 point = nearest;
 
